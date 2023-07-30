@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import pl.born2skill.imagefinder.databinding.FragmentImageListBinding
 
 class ImageListFragment : Fragment() {
 
+    private val viewModel: ImageViewModel by activityViewModels()
     private var _binding: FragmentImageListBinding? = null
     private val binding get() = _binding!!
 
@@ -18,6 +20,9 @@ class ImageListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentImageListBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+        binding.photosGrid.adapter = ImageGridAdapter()
         return binding.root
     }
 
@@ -26,5 +31,6 @@ class ImageListFragment : Fragment() {
         binding.search.setOnClickListener {
             findNavController().navigate(R.id.action_imageListFragment_to_imageDetailsFragment)
         }
+
     }
 }
