@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import pl.born2skill.imagefinder.databinding.FragmentImageListBinding
 
 class ImageListFragment : Fragment() {
@@ -29,11 +30,25 @@ class ImageListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = ImageItemAdapter{
             viewModel.selectImage(it)
-            findNavController().navigate(R.id.action_imageListFragment_to_imageDetailsFragment)
+            showDetailsDialog()
         }
         binding.photosGrid.adapter = adapter
         binding.search.setOnClickListener {
 
         }
+    }
+
+    private fun showDetailsDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.dialog_title))
+            .setMessage(getString(R.string.dialog_message))
+            .setCancelable(false)
+            .setNegativeButton(getString(R.string.dialog_negative)) { _, _ ->
+
+            }
+            .setPositiveButton(getString(R.string.dialog_positive)) { _, _ ->
+                findNavController().navigate(R.id.action_imageListFragment_to_imageDetailsFragment)
+            }
+            .show()
     }
 }

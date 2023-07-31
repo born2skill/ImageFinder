@@ -9,4 +9,8 @@
     <string name="downloads">Downloads: %d</string>
     <string name="comments">Comments: %d</string>
     <string name="image">image</string>
+    <string name="dialog_title">Image selected</string>
+    <string name="dialog_message">Do you want to see the details of this image?</string>
+    <string name="dialog_negative">No</string>
+    <string name="dialog_positive">Yes</string>
 </resources>
