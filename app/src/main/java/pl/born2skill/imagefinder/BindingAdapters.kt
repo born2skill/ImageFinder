@@ -20,6 +20,6 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<MatchedImage>?) {
-    val adapter = recyclerView.adapter as ImageGridAdapter
+    val adapter = recyclerView.adapter as ImageItemAdapter
     adapter.submitList(data)
 }

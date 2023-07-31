@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import pl.born2skill.imagefinder.databinding.FragmentImageDetailsBinding
 
 class ImageDetailsFragment : Fragment() {
 
+    private val viewModel: ImageViewModel by activityViewModels()
     private var _binding: FragmentImageDetailsBinding? = null
     private val binding get() = _binding!!
 
@@ -17,6 +19,8 @@ class ImageDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentImageDetailsBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
         return binding.root
     }
 }

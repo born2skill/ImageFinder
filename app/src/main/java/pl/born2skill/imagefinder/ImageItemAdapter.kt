@@ -6,23 +6,26 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import pl.born2skill.imagefinder.data.MatchedImage
-import pl.born2skill.imagefinder.databinding.GridViewItemBinding
+import pl.born2skill.imagefinder.databinding.ListItemBinding
 
-class ImageGridAdapter : ListAdapter<MatchedImage, ImageGridAdapter.ImageViewHolder>(DiffCallback) {
+class ImageItemAdapter (private val onItemClicked: (MatchedImage) -> Unit) : ListAdapter<MatchedImage, ImageItemAdapter.ImageViewHolder>(DiffCallback) {
 
-    class ImageViewHolder(private var binding: GridViewItemBinding): RecyclerView.ViewHolder(binding.root) {
+    class ImageViewHolder(private var binding: ListItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(image: MatchedImage) {
-            binding.photo = image
+            binding.image = image
             binding.executePendingBindings()
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
-        return ImageViewHolder(GridViewItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return ImageViewHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val image = getItem(position)
+        holder.itemView.setOnClickListener {
+            onItemClicked(image)
+        }
         holder.bind(image)
     }
 
