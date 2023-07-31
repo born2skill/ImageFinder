@@ -22,15 +22,18 @@ class ImageListFragment : Fragment() {
         _binding = FragmentImageListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        binding.photosGrid.adapter = ImageGridAdapter()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.search.setOnClickListener {
+        val adapter = ImageItemAdapter{
+            viewModel.selectImage(it)
             findNavController().navigate(R.id.action_imageListFragment_to_imageDetailsFragment)
         }
+        binding.photosGrid.adapter = adapter
+        binding.search.setOnClickListener {
 
+        }
     }
 }

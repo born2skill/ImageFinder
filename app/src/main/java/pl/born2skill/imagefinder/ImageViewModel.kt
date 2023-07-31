@@ -19,6 +19,8 @@ class ImageViewModel : ViewModel() {
     val photos: LiveData<List<MatchedImage>> = response.map {response ->
         response.hits
     }
+    private val _selectedImage = MutableLiveData<MatchedImage>()
+    val selectedImage: LiveData<MatchedImage> = _selectedImage
 
     init {
         getMatchedImages("fruits")
@@ -36,5 +38,9 @@ class ImageViewModel : ViewModel() {
                 Log.d("pyklo","chyba nie: $e")
             }
         }
+    }
+
+    fun selectImage(image: MatchedImage){
+        _selectedImage.value = image
     }
 }
