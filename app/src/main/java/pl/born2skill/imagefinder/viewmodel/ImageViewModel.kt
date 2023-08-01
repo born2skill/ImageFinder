@@ -1,4 +1,4 @@
-package pl.born2skill.imagefinder
+package pl.born2skill.imagefinder.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -29,8 +29,7 @@ class ImageViewModel(imageDao: ImageDao) : ViewModel() {
             try {
                 repository.storeResponse(term)
             } catch (e: Exception) {
-                //_response.value
-                Log.d("pyklo","chyba nie: $e")
+                Log.d("Repository","store data in repo failed: $e")
             }
         }
     }

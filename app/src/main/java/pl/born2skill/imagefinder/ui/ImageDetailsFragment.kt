@@ -1,4 +1,4 @@
-package pl.born2skill.imagefinder
+package pl.born2skill.imagefinder.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import pl.born2skill.imagefinder.ImageApplication
+import pl.born2skill.imagefinder.viewmodel.ImageViewModel
+import pl.born2skill.imagefinder.viewmodel.ImageViewModelFactory
 import pl.born2skill.imagefinder.databinding.FragmentImageDetailsBinding
 
 class ImageDetailsFragment : Fragment() {
