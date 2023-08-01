@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Image Finder</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_what_you_looking_for">Enter what you looking for</string>
+    <string name="search">search</string>
+    <string name="username">Username: %1$s</string>
+    <string name="tags">Tags: %1$s</string>
+    <string name="likes">Likes: %d</string>
+    <string name="downloads">Downloads: %d</string>
+    <string name="comments">Comments: %d</string>
+    <string name="image">image</string>
+    <string name="dialog_title">Image selected</string>
+    <string name="dialog_message">Do you want to see the details of this image?</string>
+    <string name="dialog_negative">No</string>
+    <string name="dialog_positive">Yes</string>
 </resources>
