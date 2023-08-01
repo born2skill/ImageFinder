@@ -4,35 +4,30 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import pl.born2skill.imagefinder.data.MatchedImage
-import pl.born2skill.imagefinder.data.Response
-import pl.born2skill.imagefinder.network.ImageApi
+import pl.born2skill.imagefinder.database.ImageDao
+import pl.born2skill.imagefinder.repository.Repository
 import java.lang.Exception
 
-class ImageViewModel : ViewModel() {
+class ImageViewModel(imageDao: ImageDao) : ViewModel() {
 
-    private val _response = MutableLiveData<Response>()
-    private val response: LiveData<Response> = _response
-    val photos: LiveData<List<MatchedImage>> = response.map {response ->
-        response.hits
-    }
+
+    private val repository = Repository(imageDao)
+    val photos: LiveData<List<MatchedImage>> = repository.images
     private val _selectedImage = MutableLiveData<MatchedImage>()
     val selectedImage: LiveData<MatchedImage> = _selectedImage
 
     init {
-        getMatchedImages("fruits")
+        getImageData("fruits")
     }
 
-    fun getMatchedImages(term: String){
+    fun getImageData(term: String){
         viewModelScope.launch {
             try {
-                _response.value = ImageApi.retrofitService.getImages(
-                    term = term
-                )
-                Log.d("pyklo","chyba")
+                repository.storeResponse(term)
             } catch (e: Exception) {
                 //_response.value
                 Log.d("pyklo","chyba nie: $e")
@@ -42,5 +37,15 @@ class ImageViewModel : ViewModel() {
 
     fun selectImage(image: MatchedImage){
         _selectedImage.value = image
+    }
+}
+
+class ImageViewModelFactory(private val imageDao: ImageDao) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(ImageViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return ImageViewModel(imageDao) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

@@ -12,7 +12,11 @@ import pl.born2skill.imagefinder.databinding.FragmentImageListBinding
 
 class ImageListFragment : Fragment() {
 
-    private val viewModel: ImageViewModel by activityViewModels()
+    private val viewModel: ImageViewModel by activityViewModels {
+        ImageViewModelFactory(
+            (activity?.application as ImageApplication).database.responseDao()
+        )
+    }
     private var _binding: FragmentImageListBinding? = null
     private val binding get() = _binding!!
 
