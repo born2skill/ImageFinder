@@ -22,7 +22,10 @@ class Repository(private val dao: ImageDao) {
             val images = ImageApi.retrofitService.getImages(
                 term = phrase
             )
-            dao.insert(images.asDatabaseModel())
+            dao.apply {
+                deleteAll()
+                insert(images.asDatabaseModel())
+            }
         }
     }
 }
