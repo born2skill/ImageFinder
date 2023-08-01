@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import pl.born2skill.imagefinder.databinding.FragmentImageListBinding
+import pl.born2skill.imagefinder.utils.replaceSpacesWithPlus
 
 class ImageListFragment : Fragment() {
 
@@ -38,7 +39,9 @@ class ImageListFragment : Fragment() {
         }
         binding.photosGrid.adapter = adapter
         binding.search.setOnClickListener {
-
+            viewModel.getImageData(
+                replaceSpacesWithPlus(binding.textInputEditText.text.toString())
+            )
         }
     }
 
