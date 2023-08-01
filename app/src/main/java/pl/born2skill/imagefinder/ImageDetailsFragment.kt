@@ -10,7 +10,11 @@ import pl.born2skill.imagefinder.databinding.FragmentImageDetailsBinding
 
 class ImageDetailsFragment : Fragment() {
 
-    private val viewModel: ImageViewModel by activityViewModels()
+    private val viewModel: ImageViewModel by activityViewModels {
+        ImageViewModelFactory(
+            (activity?.application as ImageApplication).database.responseDao()
+        )
+    }
     private var _binding: FragmentImageDetailsBinding? = null
     private val binding get() = _binding!!
 
