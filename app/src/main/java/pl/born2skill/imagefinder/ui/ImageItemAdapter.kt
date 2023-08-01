@@ -1,4 +1,4 @@
-package pl.born2skill.imagefinder
+package pl.born2skill.imagefinder.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import pl.born2skill.imagefinder.data.MatchedImage
 import pl.born2skill.imagefinder.databinding.ListItemBinding
 
-class ImageItemAdapter (private val onItemClicked: (MatchedImage) -> Unit) : ListAdapter<MatchedImage, ImageItemAdapter.ImageViewHolder>(DiffCallback) {
+class ImageItemAdapter (private val onItemClicked: (MatchedImage) -> Unit) : ListAdapter<MatchedImage, ImageItemAdapter.ImageViewHolder>(
+    DiffCallback
+) {
 
     class ImageViewHolder(private var binding: ListItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(image: MatchedImage) {

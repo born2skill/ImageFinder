@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/imageListFragment"
-        android:name="pl.born2skill.imagefinder.ImageListFragment"
+        android:name="pl.born2skill.imagefinder.ui.ImageListFragment"
         android:label="fragment_image_list"
         tools:layout="@layout/fragment_image_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/imageDetailsFragment"
-        android:name="pl.born2skill.imagefinder.ImageDetailsFragment"
+        android:name="pl.born2skill.imagefinder.ui.ImageDetailsFragment"
         android:label="fragment_image_details"
         tools:layout="@layout/fragment_image_details" />
 </navigation>
