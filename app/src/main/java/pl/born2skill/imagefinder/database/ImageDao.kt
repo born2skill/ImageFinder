@@ -10,8 +10,11 @@ import kotlinx.coroutines.flow.Flow
 interface ImageDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(images: List<Image>)
+    suspend fun insert(images: List<Image>)
 
     @Query("SELECT * FROM image")
     fun getImages(): Flow<List<Image>>
+
+    @Query("DELETE FROM image")
+    suspend fun deleteAll()
 }
